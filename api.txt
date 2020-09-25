@@ -1,0 +1,19 @@
+http://localhost:5000/api/register
+
+{
+  "email": "jai@jai.com",
+  "username" : "user",
+  "password" : "user",
+  "role": "emp",
+  "empId": 2555
+
+}
+
+http://localhost:5000/api/login
+
+{
+    "email": "jai@jai.com",
+    "password" : "user"
+}
+
+http://localhost:5000/api/getall

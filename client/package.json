@@ -1,0 +1,70 @@
+{
+    "name": "client",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@devexpress/dx-react-core": "^2.7.0",
+        "@devexpress/dx-react-grid": "^2.7.0",
+        "@devexpress/dx-react-grid-bootstrap4": "^2.7.0",
+        "@material-ui/core": "^4.11.0",
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^10.4.7",
+        "@testing-library/user-event": "^7.1.2",
+        "axios": "^0.19.2",
+        "bootstrap": "^4.5.0",
+        "enzyme-adapter-react-16": "^1.15.2",
+        "formik": "^2.1.5",
+        "generate-password": "^1.5.1",
+        "material-table": "^1.66.0",
+        "mdbreact": "^4.27.0",
+        "password-generator": "^2.3.2",
+        "random": "^2.2.0",
+        "react": "^16.13.1",
+        "react-bootstrap": "^1.3.0",
+        "react-bootstrap-table": "^4.3.1",
+        "react-bootstrap-table-next": "^4.0.3",
+        "react-bootstrap-table-plus": "^1.0.3",
+        "react-crud-table": "^0.0.8",
+        "react-csv": "^2.0.3",
+        "react-dom": "^16.13.1",
+        "react-password-with-generator": "^2.0.0",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "^3.4.1",
+        "react-select-search": "^2.1.0",
+        "react-strap": "^0.0.1",
+        "react-table": "6.8.2",
+        "react-table-v6": "^6.8.6",
+        "react-toastify": "^6.0.8",
+        "reactstrap": "^8.5.1",
+        "strap": "^0.1.0",
+        "styled-components": "^5.1.1",
+        "yup": "^0.29.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "chai": "3.5.0",
+        "enzyme": "^3.11.0",
+        "react-addons-test-utils": "^15.6.2",
+        "react-test-renderer": "15.5.4"
+    }
+}
