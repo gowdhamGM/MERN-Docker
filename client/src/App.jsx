@@ -25,7 +25,12 @@ import EmpTable from './auth/empTable'
 import AddEmp from './auth/addEmp';
 import EditEmp from './auth/editEmp';
 import TSTable from './auth/timesheet/tstable';
-import AddTest from './auth/timesheet/addTest'
+import AddTest from './auth/timesheet/addTest';
+import Pagination from './auth/pag';
+import MatPaginationTable from './auth/testing33'
+import 'bulma/css/bulma.min.css';
+import TimeSheetTable from './auth/timesheet/timeSheetTable';
+
 
 
 
@@ -55,7 +60,9 @@ const App = () => {
             <Route exact path = "/project/edit/:clientname/:projectname" component={EditPro}/>
             <Route exact path = "/timesheet/:empId" component={TSTable} />
             <Route exact path = "/addts" component={AddTest} /> 
-            {/* <Route exact path = "/hrtable" component={HrTable} />  */} 
+            <Route exact path = "/pagination" component={Pagination}/>
+            <Route exact path = "/datas" component={MatPaginationTable}/>
+            <Route exact path = "/timesheettable" component={TimeSheetTable} />  
         </Switch>
         <ToastContainer />
       </>      

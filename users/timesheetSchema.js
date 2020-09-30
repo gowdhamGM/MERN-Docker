@@ -11,8 +11,9 @@ const timesheetData = mongoose.Schema({
     status:{
         type:String,
     },
+
     date:{
-        type:Date,
+        type :String,
     },
     clientName:{
         type :String,

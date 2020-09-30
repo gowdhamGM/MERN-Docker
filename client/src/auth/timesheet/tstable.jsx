@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,Fragment} from 'react';
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TableNavbar from '../__navbar'
@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import Example from './addTs'
 import AddTest from './addTest'
 import { useHistory,  useRouteMatch } from "react-router-dom";
+import TimeSheetTable from './timeSheetTable'
 
 
 const TSTable = () => {
@@ -33,7 +34,8 @@ const TSTable = () => {
    
   }, []);
   
-  console.log(data)
+  console.log("employeeName",name)
+  console.log("employeeId",empId)
 
 
   const loadData = async() => {
@@ -61,6 +63,7 @@ const TSTable = () => {
    
   }; 
   console.log("data" ,loadData.employeeName)
+
   var styles = {
     color:"blue",
   }
@@ -168,9 +171,10 @@ const TSTable = () => {
           <div className="col-md-4">
           <button type="button" class="btn btn-outline-primary">September</button>
           <bk>  </bk>
-          <AddTest/>
-          {/* <button type="button" onClick={} class="btn btn-outline-secondary"></button>  */}
-          
+          <Fragment>
+           <AddTest empId={empId} empName={name}/>  
+          </Fragment>
+              
 
           </div> 
         </div>
@@ -182,61 +186,9 @@ const TSTable = () => {
                <br></br> 
 
         <div className="bottomContainer">
-        <div className="row hrtable">
-        <div className="col-lg-11">
-          <div className="table-responsive tcenter" >
-            <table className="table table-bordered table-hover table-sm">
-              <thead className="thead-dark">
-                <tr>   
-                <th scope="col"><input type="checkbox" /></th>              
-                  <th scope="col">Date</th> 
-                  <th scope="col">ClientName</th>
-                  <th scope="col">ProjectName</th>
-                  <th scope="col">TaskName</th> 
-                  <th scope="col">WorkDone</th>               
-                  <th scope="col">Duration(HH:MM)</th>               
-                  <th>Action</th>            
-                </tr>
-              </thead>
-              <tbody>
-                { (data.length > 0) ? data.map( (e, index) => {
-                  return (
-                    <tr key={ e.id }>
-                    <th scope="row">
-                      <input type="checkbox"/>
-                    </th>
-                    
-                    <td>{ e.date }</td>
-                    <td>{ e.clientName}</td>
-                    <td>{ e.projectName }</td> 
-                    <td>{ e.taskName }</td>
-                    <td>{e.workDone}</td>
-                    <td>{e.durationHrs}</td>                
-                    <td>
-                    <Link
-                      className="btn btn-outline-primary mr-2"
-                      to={`/client/edit/${e.id}`}
-                    >
-                      Edit
-                    </Link>
-                    <Link
-                      className="btn btn-danger"
-                      //onClick={() => delData(e)}
-                      to={`/client/del/${e.id}`}
-                    >
-                      Delete
-                    </Link>
-                      </td>                
-                  </tr>            
-                  )
-                }) : <tr><td colSpan="8">No Records Found</td></tr> }
-               
-                    
-              </tbody>
-            </table>
-            </div> 
-          </div>
-          </div>
+          <Fragment>
+          <TimeSheetTable empId={empId}/>
+          </Fragment>
   
         </div>
       </div>       

@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,Fragment } from 'react';
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TableNavbar from './__navbar'
 import {Link} from 'react-router-dom';
+import Pagination from './pag'
+import MatPaginationTable from './testing33'
+
+
 
 const Table = () => {
   
   const [data, setData] = useState([]); 
-  // var dip = [];
+ console.log("data",data)
 
   useEffect(() => {
     loadData();
@@ -53,6 +57,9 @@ const Table = () => {
   return (
     <>
       <TableNavbar />
+    
+ 
+    
       <div className="row addButton">
             <div className="col-lg-1" >
             <Link
@@ -61,6 +68,9 @@ const Table = () => {
               >New</Link>
             </div>            
         </div>
+        <MatPaginationTable/>
+      
+      {/*
       <div className="row hrtable">
         <div className="col-lg-10 col-sm-6 col-md-6">
           <div className="table-responsive tcenter" >
@@ -68,17 +78,18 @@ const Table = () => {
               <thead className="thead-dark">
                 <tr>                 
                   <th scope="col"><input type="checkbox" /></th>
-                  {/* <th scope="col">Client ID</th> */}
+                 
                   <th scope="col">Client Name</th>
                   <th scope="col">Client Company Name</th>
                   <th scope="col">Status</th>  
-                  {/* {<th scope="col">Taskname</th>  } */}
+                 
                   <th>Action</th>        
                 </tr>
               </thead>
               <tbody>
                 { (data.length > 0) ? data.map( (droplet, index) => {
                   return (
+                    
                     <tr key={ droplet.id }>
                       <th scope="row">
                         <input type="checkbox"/>
@@ -95,7 +106,7 @@ const Table = () => {
                       </Link>
                       <Link
                         className="btn btn-danger"
-                        //onClick={() => delData(droplet)}
+                       
                         to={`/client/del/${droplet.clientName}`}
                       >
                         Delete
@@ -111,9 +122,10 @@ const Table = () => {
             </div> 
           </div>
           
-          </div>
+          </div> */}
     </>
   );
 }
 
 export default Table;
+

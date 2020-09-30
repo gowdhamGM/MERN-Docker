@@ -3,6 +3,7 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TableNavbar from './__navbar'
 import {Link} from 'react-router-dom';
+import PTable from './pTable'
 
 const ProTable = () => {
   
@@ -48,6 +49,7 @@ const ProTable = () => {
   return (
     <>
       <TableNavbar />
+      <PTable/>
       <div className="row addButton">
             <div className="col-lg-1">
             <Link

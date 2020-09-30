@@ -310,6 +310,7 @@ router.delete("/empdeldata/:id", async(req, res) => {
 
 
 router.post("/timesheetpostdata",async(req,res)=>{
+
     var timeSheetdata = new TimeSheet({
         employeeId: req.body.employeeId,
         employeeName: req.body.employeeName,
@@ -337,8 +338,44 @@ router.get ("/timesheetgetdata",async(req,res)=>{
 router.get('/timesheetgetdata/:id', async(req, res) => {
     var findData = await TimeSheet.find({ employeeId: req.params.id }).select(['-__v']);
     res.json(findData)
+    console.log(findData)
+});
+
+router.get('/timesheetgetdata2/:id', async(req, res) => {
+    var findData = await TimeSheet.find({ employeeId: req.params.id, date: req.body.date }).select(['-__v']);
+    res.json(findData)
+    console.log(findData)
 
 });
+
+
+
+
+router.get('/tsheet', async(req, res) => {
+    var findData = await TimeSheet.find({
+        $expr:{
+            $eq:[
+                {
+                    $year:"createdAt"
+                },
+                2020
+            ],
+            $eq:[
+                {
+                    $month:"createdAt"
+                },
+                9
+            ]
+        },
+        employeeId:"2707"
+    })
+    res.json(findData)
+
+ })
+
+    
+
+    
 
 router.put("/timesheetupddata/:id", async(req, res) => {
 
