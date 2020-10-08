@@ -27,9 +27,11 @@ import EditEmp from './auth/editEmp';
 import TSTable from './auth/timesheet/tstable';
 import AddTest from './auth/timesheet/addTest';
 import Pagination from './auth/pag';
-import MatPaginationTable from './auth/testing33'
+import MatPaginationTable from './auth/clientDataTable'
 import 'bulma/css/bulma.min.css';
 import TimeSheetTable from './auth/timesheet/timeSheetTable';
+import Login1 from './auth/timesheet/layout'
+import AlertDelete from './auth/del'
 
 
 
@@ -39,8 +41,7 @@ const App = () => {
     <BrowserRouter>       
       <>     
         <Switch>
-            <Route exact path = "/" component={Login} />  
-                        
+            <Route exact path = "/" component={Login} />                         
             <Route exact path = "/login" component={Login} />            
             <Route exact path = "/register" component={Register} />  
             <Route exact path = "/home" component={Home} />          
@@ -61,8 +62,9 @@ const App = () => {
             <Route exact path = "/timesheet/:empId" component={TSTable} />
             <Route exact path = "/addts" component={AddTest} /> 
             <Route exact path = "/pagination" component={Pagination}/>
-            <Route exact path = "/datas" component={MatPaginationTable}/>
-            <Route exact path = "/timesheettable" component={TimeSheetTable} />  
+            <Route exact path = "/timesheettable" component={TimeSheetTable} /> 
+            <Route exact path = "/login1" component={Login1} />  
+            <Route exact path = "/del/:id" component={AlertDelete}/>
         </Switch>
         <ToastContainer />
       </>      

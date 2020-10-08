@@ -7,7 +7,7 @@ import { useHistory,  useRouteMatch } from "react-router-dom";
 const DelClient = () =>{
     let history = useHistory();
     const match = useRouteMatch('/client/del/:id')
-    const clientName = match.params.id;
+    const id = match.params.id;
     //const clientid = match.params.clientid
     const [data, setData] = useState([]);
     
@@ -18,12 +18,9 @@ const DelClient = () =>{
     []);
 
     const loadData = async() => {
-
-        const result = await axios.get(`http://localhost:5000/api/clientgetdata/${clientName}`)
+        const result = await axios.get(`http://localhost:5000/api/clientgetdata/${id}`)
         setData(result.data);
-
-        console.log("This",result.data)
-    
+        console.log("This",result.data)    
     };
 
     const cancelDel =()=>{
@@ -31,7 +28,7 @@ const DelClient = () =>{
     };
     
     const onClick = () => {
-        axios.delete(`http://localhost:5000/api/clientdeldata/${clientName}`)
+        axios.delete(`http://localhost:5000/api/clientdeldata/${id}`)
         history.push('/client')
         window.location.reload(false);
 
@@ -41,24 +38,18 @@ const DelClient = () =>{
        
 
 <body>
-  <style>
-    
-  </style>
 
 
     <div className="container">
-    <div class="col-xs-1 center-block">
-    
-        <div className="card">
-    <div className="card-header">
-      <h1>Delete Client</h1>
-      <h5>Are you sure you want to delete client ?</h5>
-      <h5>client have these projects</h5>
-      </div>
+     <div class="col-xs-1 center-block">    
+      <div className="card">
+        <div className="card-header">
+          <h1>Delete Client</h1>
+          <h5>Are you sure you want to delete client ?</h5>
+          <h5>client have these projects</h5>
+        </div>
       <>
-      
-
-      {
+            {
           data.map(event => {
               return(
                   <>
@@ -72,9 +63,8 @@ const DelClient = () =>{
               )
             } 
           )
-      }
-      
-        <div className="clearfix">
+      }      
+      <div className="clearfix">
         <button onClick={() => cancelDel()} className="btn btn-outline-primary mr-2" >Cancel</button>
         <button onClick={() => onClick()}  className="btn btn-danger">Delete</button>
       </div>    

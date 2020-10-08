@@ -4,15 +4,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import TableNavbar from './__navbar'
 import {Link} from 'react-router-dom';
 import Pagination from './pag'
-import MatPaginationTable from './testing33'
+import ClientDataTable from './clientDataTable'
+import AlertDelete from './del'
+import { makeStyles } from '@material-ui/core/styles';  
 
+const useStyles = makeStyles({  
+  root: {  
+    width: '100%',  
+  },  
 
+  container: {  
+    maxHeight: 440,  
+
+  }, 
+  font:{
+    fontSize: '100%'
+  } 
+});  
 
 const Table = () => {
-  
+  const classes = useStyles();    
   const [data, setData] = useState([]); 
- console.log("data",data)
-
+  console.log("data",data)
   useEffect(() => {
     loadData();
    
@@ -56,10 +69,8 @@ const Table = () => {
     
   return (
     <>
-      <TableNavbar />
-    
- 
-    
+      <TableNavbar />   
+      <div className={classes.font}> 
       <div className="row addButton">
             <div className="col-lg-1" >
             <Link
@@ -68,10 +79,10 @@ const Table = () => {
               >New</Link>
             </div>            
         </div>
-        <MatPaginationTable/>
+        <ClientDataTable />
       
-      {/*
-      <div className="row hrtable">
+      
+      {/* <div className="row hrtable">
         <div className="col-lg-10 col-sm-6 col-md-6">
           <div className="table-responsive tcenter" >
             <table className="table table-bordered table-hover table-sm">
@@ -97,21 +108,14 @@ const Table = () => {
                       <td>{ droplet.clientName }</td>
                       <td>{ droplet.companyName}</td>
                       <td>{ droplet.clientStatus }</td>    
-                      <td>
-                      <Link
-                        className="btn btn-outline-primary mr-2"
-                        to={`/client/edit/${droplet.id}`}
-                      >
-                        Edit
-                      </Link>
-                      <Link
-                        className="btn btn-danger"
-                       
-                        to={`/client/del/${droplet.clientName}`}
-                      >
-                        Delete
-                      </Link>
-                        </td>                
+                      <td>                     
+                        <button
+                          className="btn btn-outline-primary mr-2"
+                          to={`/client/edit/${droplet.id}`}>
+                          Edit
+                        </button>                       
+                        <button class="btn btn-danger"><AlertDelete id={droplet.id}/></button>
+                      </td>                
                     </tr>                    
                   )
                 }) : <tr><td colSpan="5">No Records Found</td></tr> }
@@ -123,6 +127,7 @@ const Table = () => {
           </div>
           
           </div> */}
+          </div>
     </>
   );
 }

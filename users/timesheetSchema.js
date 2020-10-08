@@ -29,7 +29,7 @@ const timesheetData = mongoose.Schema({
         type : String,
     },
     durationHrs:{
-        type: String,
+        type: Number,
     },
     durationMins:{
         type: String,

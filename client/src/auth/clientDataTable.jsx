@@ -9,8 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';  
 import TableRow from '@material-ui/core/TableRow';  
 import axios from 'axios';    
-import { useState, useEffect } from 'react'   
+import { useState, useEffect,Fragment } from 'react'   
 import {Link} from 'react-router-dom';
+import AlertDelete from './del'
 
 const useStyles = makeStyles({  
   root: {  
@@ -20,11 +21,14 @@ const useStyles = makeStyles({
   container: {  
     maxHeight: 440,  
 
-  },  
+  }, 
+  tablecell: {
+    fontSize: '100%'
+  }
 });  
 
   
- const MatPaginationTable =()=> {  
+ const ClientDataTable =()=> {  
 
   const classes = useStyles();  
   const [page, setPage] = React.useState(0);  
@@ -63,7 +67,7 @@ const handleChangePage = (event, newPage) => {
 
   return (
      <>
-    
+     <div className={classes.font}>
     <div className="row hrtable">       
     <div className="col-lg-11 col-sm-6 col-md-6">
          <div className="table-responsive tcenter" >
@@ -74,10 +78,10 @@ const handleChangePage = (event, newPage) => {
             <TableHead  className="thead-dark">  
                 <TableRow>  
                
-                    <TableCell align="right">Clinet Name</TableCell>  
-                    <TableCell align="right">Comapny Name</TableCell>  
-                    <TableCell align="right">Status</TableCell>  
-                    <TableCell align="center">Action</TableCell>  
+                    <TableCell className={classes.tablecell} align="right">Clinet Name</TableCell>  
+                    <TableCell className={classes.tablecell} align="right">Comapny Name</TableCell>  
+                    <TableCell className={classes.tablecell} align="right">Status</TableCell>  
+                    <TableCell className={classes.tablecell}align="center">Action</TableCell>  
 
                 </TableRow>  
             </TableHead>  
@@ -88,33 +92,28 @@ const handleChangePage = (event, newPage) => {
                 {(data.length > 0) ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {  
                 return (  
                     <TableRow >  
-                    <TableCell align="right">{row.clientName}</TableCell>  
-                    <TableCell align="right">{row.companyName}</TableCell>  
-                    <TableCell align="right">{row.clientStatus}</TableCell>  
-                    <TableCell>
+                    <TableCell className={classes.tablecell} align="right">{row.clientName}</TableCell>  
+                    <TableCell className={classes.tablecell} align="right">{row.companyName}</TableCell>  
+                    <TableCell className={classes.tablecell} align="right">{row.clientStatus}</TableCell>  
+                    <TableCell className={classes.tablecell}>
                     <Link
                         className="btn btn-outline-primary mr-2"
-                        to={`/client/edit/${row.id}`}
+                        to={`/client/edit/${row._id}`}
                       >
                         Edit
                       </Link>
-                      <Link
-                        className="btn btn-danger"
-                        to={`/client/del/${row.clientName}`}
-                      >
-                        Delete
-                      </Link>
+                      <Fragment>
+                        <button class="btn btn-danger"><AlertDelete id={row._id}/></button>
+                      </Fragment>                     
                     </TableCell>
                     </TableRow>             
                     );  
                     }): <tr><td colSpan="5">No Records Found</td></tr>}  
 
 
-            </TableBody>  
-            
+            </TableBody>            
             </Table>  
-            </TableContainer>
-           
+            </TableContainer>           
              </Paper> 
              </table> 
              <TablePagination  
@@ -129,10 +128,11 @@ const handleChangePage = (event, newPage) => {
              </div>
              </div>
              </div>
+             </div>
     </>
   );  
 
 } 
-export default MatPaginationTable;
+export default ClientDataTable;
 
 

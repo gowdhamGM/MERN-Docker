@@ -129,7 +129,7 @@ router.get('/clientgetdata/:id', async(req, res) => {
 });
 
 router.delete("/clientdeldata/:id", async(req, res) => {
-    var getData = await ClientData.deleteOne({ clientName: req.params.id }).then(e => {
+    var getData = await ClientData.deleteOne({ _id: req.params.id }).then(e => {
         res.json(e)
     })
 
@@ -310,6 +310,10 @@ router.delete("/empdeldata/:id", async(req, res) => {
 
 
 router.post("/timesheetpostdata",async(req,res)=>{
+        var hm = req.body.durationHrs;   // your input string
+        var a = hm.split(':'); // split it at the colons
+        var minutes = (+a[0]) * 60 + (+a[1])  ; 
+
 
     var timeSheetdata = new TimeSheet({
         employeeId: req.body.employeeId,
@@ -320,8 +324,7 @@ router.post("/timesheetpostdata",async(req,res)=>{
         projectName:req.body.projectName,
         taskName:req.body.taskName,
         workDone:req.body.workDone,
-        durationHrs:req.body.durationHrs,
-        durationMins :req.body.durationMins,
+        durationHrs:minutes,
         createdAt:new Date(),
         updatedAt: new Date(),
 
@@ -337,45 +340,23 @@ router.get ("/timesheetgetdata",async(req,res)=>{
 
 router.get('/timesheetgetdata/:id', async(req, res) => {
     var findData = await TimeSheet.find({ employeeId: req.params.id }).select(['-__v']);
+    
     res.json(findData)
-    console.log(findData)
+    var result = findData.map(({durationHrs}) => ({
+        durationHrs
+    }))
+    // console.log(result)
+
+  
 });
 
-router.get('/timesheetgetdata2/:id', async(req, res) => {
-    var findData = await TimeSheet.find({ employeeId: req.params.id, date: req.body.date }).select(['-__v']);
+
+//filter timesheet table month and year based with employee ID
+router.get('/tsheet/:employeeId/:duration', async(req, res) => {
+    var findData = await TimeSheet.find({ "date":{$regex:req.params.duration}, employeeId:req.params.employeeId }).select(['-__v']);
     res.json(findData)
-    console.log(findData)
 
 });
-
-
-
-
-router.get('/tsheet', async(req, res) => {
-    var findData = await TimeSheet.find({
-        $expr:{
-            $eq:[
-                {
-                    $year:"createdAt"
-                },
-                2020
-            ],
-            $eq:[
-                {
-                    $month:"createdAt"
-                },
-                9
-            ]
-        },
-        employeeId:"2707"
-    })
-    res.json(findData)
-
- })
-
-    
-
-    
 
 router.put("/timesheetupddata/:id", async(req, res) => {
 
@@ -410,7 +391,31 @@ router.delete("/timesheetdeldata/:id", async(req, res) => {
     })
 
 })
+//get total working days count
+router.get("/present/:employeeId",async(req,res)=>{
+    var getData = await TimeSheet.find({employeeId:req.params.employeeId,status:"Present"}).then(e=>{
+        res.json(e)
+    })
+})
 
+//get total leave days count
 
+router.get("/absent/:employeeId",async(req,res)=>{
+    var getData = await TimeSheet.find({employeeId:req.params.employeeId,status:"Absent"}).then(e=>{
+        res.json(e)
+    })
+})
 
+// get total working hours with empId
+router.get("/totalhour/:employeeId",async(req,res)=>{
+    var getData = await TimeSheet.aggregate([
+        {
+            $match:{employeeId:req.params.employeeId}},
+            {
+                $group:{_id:null,totalduration:{$sum:"$durationHrs"}}
+            }
+        ]).then(e=>{
+        res.json(e)
+    })
+})
 module.exports = router;

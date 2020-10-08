@@ -12,26 +12,29 @@ import axios from 'axios';
 import { useState, useEffect } from 'react'   
 import {Link} from 'react-router-dom';
 
+
 const useStyles = makeStyles({  
   root: {  
     width: '100%',  
   }, 
   container: {  
-    maxHeight: 440,  
+    maxHeight: 900,  
   },
   tablecell: {
     fontSize: '100%'
-},  
+  }, 
+  color:{
+    color:'#D3D3D3'
+  } 
 });  
 
   
-const TimeSheetTable =({empId})=> {  
+const TimeSheetTable =({data})=> {  
 
-  const empID =empId
+
   const classes = useStyles();  
   const [page, setPage] = React.useState(0);  
-  const [data, setData] = useState([]);   
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);  
+  const [rowsPerPage, setRowsPerPage] = React.useState(15);  
   const handleChangePage = (event, newPage) => {  
      setPage(newPage);  
    };    
@@ -39,21 +42,15 @@ const TimeSheetTable =({empId})=> {
     setRowsPerPage(+event.target.value);  
     setPage(0);  
   }; 
-  useEffect(() => {
-    loadData();
-   
-  }, []); 
-
-  const loadData = async() => {
-    axios.get(`http://localhost:5000/api/timesheetgetdata/${empID}`)    
-      .then(response => {setData(response.data)})}
-
-  
+ 
 
   return (
      <>    
-    <div className="row hrtable">       
-    <div className="col-lg-11 col-sm-6 col-md-6">
+    <div >     
+      
+    <div className="col-lg-12">
+    <div className="card ">
+        <div className="card-body">  
          <div className="table-responsive tcenter" >
             <table className="table table-bordered table-hover table-sm">      
             <Paper className={classes.root}>  
@@ -76,24 +73,25 @@ const TimeSheetTable =({empId})=> {
     
         
             <TableBody>  
-                {(data.length > 0) ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {  
+                {(data.length > 0) ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
+
                 return (  
                     <TableRow >  
                         <TableCell className={classes.tablecell} align="right">{row.date}</TableCell> 
                         <TableCell className={classes.tablecell}align="right">{row.clientName}</TableCell> 
                         <TableCell className={classes.tablecell} align="right">{row.projectName}</TableCell> 
                         <TableCell className={classes.tablecell} align="right">{row.taskName}</TableCell> 
-                        <TableCell className={classes.tablecell} align="right">{row.workDone}</TableCell>  
-                        <TableCell className={classes.tablecell} align="right">{row.durationHrs}</TableCell>  
+                        <TableCell className={classes.tablecell} align="right">{row.workDone}</TableCell>                        
+                        <TableCell className={classes.tablecell} align="right">{(`0${row.durationHrs / 60 ^ 0}`.slice(-2) + ':' + ('0' + row.durationHrs % 60).slice(-2) )}</TableCell>  
                         <TableCell>
                         <Link
-                            className="btn btn-outline-primary mr-2"
+                            className="btn btn-outline-primary mr-2 "
                             to={`/client/edit/${row.id}`}
                         >
                             Edit
                         </Link>
                         <Link
-                            className="btn btn-danger"
+                            className="btn btn-danger "
                             to={`/client/del/${row.clientName}`}
                         >
                             Delete
@@ -111,7 +109,7 @@ const TimeSheetTable =({empId})=> {
            
              </Paper> 
                 </table> 
-                    <TablePagination  
+                    {/* <TablePagination  
                     rowsPerPageOptions={[5, 10, 15]}  
                     component="div"  
                     count={data.length}  
@@ -119,7 +117,9 @@ const TimeSheetTable =({empId})=> {
                     page={page}  
                     onChangePage={handleChangePage}  
                     onChangeRowsPerPage={handleChangeRowsPerPage}  
-                    />  
+                    />   */}
+             </div>
+             </div>
              </div>
              </div>
              </div>

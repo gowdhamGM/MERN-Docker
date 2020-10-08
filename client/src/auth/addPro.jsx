@@ -13,19 +13,23 @@ const AddPro = () =>{
         clientName:'',
         projectName:'',
         proStatus:'',
+        yyyymm:''
         
 
     });
-    const { clientName, projectName, proStatus} = table;
+    const { clientName, projectName,yyyymm, proStatus} = table;
 
     const onInputChange = e => {
         setTable({...table, [e.target.name]:e.target.value});
+        console.log("month year",table.yyyymm)
+        console.log(table)
     }; 
+    console.log("outside",table)
 
     useEffect(() => {
         clientNameGet();
     }, [])
-    
+
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(clientName) 
@@ -82,7 +86,19 @@ const AddPro = () =>{
                     value={projectName}
                     onChange={e => onInputChange(e)}
                     />
-                </div>              
+                </div>    
+                 
+                <div className="form-group">
+                <label className="sr-only">Project Name</label>
+                    <input
+                    type="month"
+                    className="form-control form-control-lg"
+                    placeholder="Enter The Project Name"
+                    name="yyyymm"
+                    value={yyyymm}
+                    onChange={e => onInputChange(e)}
+                    />
+                </div>            
                 <div className="form-group">
                     <select 
                         name="proStatus"

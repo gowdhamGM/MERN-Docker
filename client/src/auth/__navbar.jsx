@@ -28,7 +28,7 @@ export default function TableNavbar() {
 	return (
 		<div>
 			<div className="hrback">
-			<Navbar >
+			<Navbar className="navbar navbar-expand-sm " >
 				<Navbar.Brand  className="navbars"></Navbar.Brand>
 				<Navbar.Toggle />            
 				<Navbar.Collapse className="justify-content-end">

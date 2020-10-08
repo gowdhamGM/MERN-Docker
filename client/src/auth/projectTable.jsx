@@ -49,16 +49,13 @@ const ProTable = () => {
   return (
     <>
       <TableNavbar />
-      <PTable/>
+      {/* <PTable/> */}
       <div className="row addButton">
             <div className="col-lg-1">
             <Link
                 className="btn btn-outline-primary mr-2"
                 to={'/client/addpro'}
               >New</Link>
-            </div>
-            <div className="col-lg-1">
-            {/* <button variant="primary" >Delete</button> */}
             </div>
         </div>
       <div className="row hrtable">
